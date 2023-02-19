@@ -11,7 +11,7 @@ export class MyController {
     return document.generatedId;
   }
 
-  @Get('lastGeneratedId')
+  @Get('lastid')
   async getLastGeneratedId(@Query('query') query: string): Promise<string> {
     const lastGeneratedId = await this.myService.getLastGeneratedId(query);
     return lastGeneratedId;

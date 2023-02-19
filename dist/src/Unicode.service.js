@@ -17,22 +17,11 @@ const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
 const moment = require("jalali-moment");
 const typeorm_2 = require("typeorm");
-const idCounter_entity_1 = require("./idCounter.entity");
 const unicode_entity_1 = require("./unicode.entity");
 let MyService = class MyService {
-    constructor(myRepository, idCounterRepository) {
+    constructor(myRepository) {
         this.myRepository = myRepository;
-        this.idCounterRepository = idCounterRepository;
         this.fifthEighthMap = new Map();
-    }
-    async createDocument(query) {
-        const firstTwo = query.slice(0, 2);
-        const generatedId = await this.getGeneratedId(firstTwo);
-        console.log(generatedId);
-        const document = new unicode_entity_1.MyCollection();
-        document.query = query;
-        document.generatedId = generatedId;
-        return await this.myRepository.save(document);
     }
     async getGeneratedId(firstTwo) {
         let fifthEighth = this.fifthEighthMap.get(firstTwo) || 1000;
@@ -48,22 +37,27 @@ let MyService = class MyService {
         const generatedCode = firstTwo + thirdFourth + fifthEight + ninth.toString();
         return generatedCode;
     }
+    async createDocument(query) {
+        const firstTwo = query.slice(0, 2);
+        const generatedId = await this.getGeneratedId(firstTwo);
+        console.log(generatedId);
+        const document = new unicode_entity_1.MyCollection();
+        document.query = query;
+        document.generatedId = generatedId;
+        return await this.myRepository.save(document);
+    }
     async getLastGeneratedId(query) {
-        const result = await this.unicodeRepository.find({
-            query: query
-        }, {
-            sort: { generatedId: -1 },
-            take: 1
+        const lastGeneratedId = await this.myRepository.findOne({
+            where: { query: query },
+            order: { generatedId: 'DESC' }
         });
-        const lastGeneratedId = result.length > 0 ? result[0].generatedId : null;
+        return lastGeneratedId ? lastGeneratedId.generatedId : null;
     }
 };
 MyService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, typeorm_1.InjectRepository)(unicode_entity_1.MyCollection)),
-    __param(1, (0, typeorm_1.InjectRepository)(idCounter_entity_1.IdCounter)),
-    __metadata("design:paramtypes", [typeorm_2.Repository,
-        typeorm_2.Repository])
+    __metadata("design:paramtypes", [typeorm_2.Repository])
 ], MyService);
 exports.MyService = MyService;
 //# sourceMappingURL=Unicode.service.js.map

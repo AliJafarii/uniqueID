@@ -36,7 +36,7 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], MyController.prototype, "createDocument", null);
 __decorate([
-    (0, common_1.Get)('lastGeneratedId'),
+    (0, common_1.Get)('lastid'),
     __param(0, (0, common_1.Query)('query')),
     __metadata("design:type", Function),
     __metadata("design:paramtypes", [String]),
