@@ -1,7 +1,7 @@
 import { Column, Entity, ObjectIdColumn } from "typeorm";
 
 @Entity()
-export class UniqueIDCollection {
+export class PartOfID {
   @ObjectIdColumn()
   _id: number;
 

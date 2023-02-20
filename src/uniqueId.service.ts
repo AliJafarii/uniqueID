@@ -3,15 +3,15 @@ import { InjectRepository } from '@nestjs/typeorm';
 import * as moment from 'jalali-moment';
 import { Repository } from 'typeorm';
 import { UniqueID } from './uniqueId.entity';
-import { UniqueIDCollection } from './uniqueIdCollection.entity';
+import { PartOfID } from './partOfId.entity';
 
 @Injectable()
 export class UniqueIDService {
   constructor(
     @InjectRepository(UniqueID) 
     private readonly uniqueIDRepository: Repository<UniqueID>,
-    @InjectRepository(UniqueIDCollection) 
-    private readonly uniqueIDCollectionRepository: Repository<UniqueIDCollection>,
+    @InjectRepository(PartOfID) 
+    private readonly uniqueIDCollectionRepository: Repository<PartOfID>,
   ) {}
 
   private fifthEighthMap = new Map<string, number>();
@@ -47,7 +47,7 @@ export class UniqueIDService {
     uniqueID.createdAt = new Date();
     await this.uniqueIDRepository.save(uniqueID);
 
-    const uniqueIDCollection = new UniqueIDCollection();
+    const uniqueIDCollection = new PartOfID();
     uniqueIDCollection.firstTwo = firstTwo;
     uniqueIDCollection.fifthEighth = fifthEighth;
     uniqueIDCollection.createdAt = new Date();
