@@ -9,9 +9,10 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.AppModule = void 0;
 const common_1 = require("@nestjs/common");
 const typeorm_1 = require("@nestjs/typeorm");
-const unicode_entity_1 = require("./unicode.entity");
-const Unicode_controller_1 = require("./Unicode.controller");
-const Unicode_service_1 = require("./Unicode.service");
+const uniqueId_entity_1 = require("./uniqueId.entity");
+const uniqueIdCollection_entity_1 = require("./uniqueIdCollection.entity");
+const uniqueId_controller_1 = require("./uniqueId.controller");
+const uniqueId_service_1 = require("./uniqueId.service");
 let AppModule = class AppModule {
 };
 AppModule = __decorate([
@@ -22,13 +23,13 @@ AppModule = __decorate([
                 host: 'localhost',
                 port: 27018,
                 database: 'IM',
-                entities: [unicode_entity_1.MyCollection],
+                entities: [uniqueId_entity_1.UniqueID, uniqueIdCollection_entity_1.UniqueIDCollection],
                 synchronize: true,
             }),
-            typeorm_1.TypeOrmModule.forFeature([unicode_entity_1.MyCollection]),
+            typeorm_1.TypeOrmModule.forFeature([uniqueId_entity_1.UniqueID, uniqueIdCollection_entity_1.UniqueIDCollection]),
         ],
-        controllers: [Unicode_controller_1.MyController],
-        providers: [Unicode_service_1.MyService],
+        controllers: [uniqueId_controller_1.UniqueIDController],
+        providers: [uniqueId_service_1.UniqueIDService],
     })
 ], AppModule);
 exports.AppModule = AppModule;

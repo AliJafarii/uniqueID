@@ -12,39 +12,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
     return function (target, key) { decorator(target, key, paramIndex); }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MyController = void 0;
+exports.UniqueIDController = void 0;
 const common_1 = require("@nestjs/common");
-const Unicode_service_1 = require("./Unicode.service");
-let MyController = class MyController {
-    constructor(myService) {
-        this.myService = myService;
+const uniqueId_service_1 = require("./uniqueId.service");
+let UniqueIDController = class UniqueIDController {
+    constructor(uniqueIDService) {
+        this.uniqueIDService = uniqueIDService;
     }
-    async createDocument(query) {
-        const document = await this.myService.createDocument(query);
-        return document.generatedId;
-    }
-    async getLastGeneratedId(query) {
-        const lastGeneratedId = await this.myService.getLastGeneratedId(query);
-        return lastGeneratedId;
+    async generateUniqueID(data) {
+        const generatedID = await this.uniqueIDService.generateID(data.query);
+        return generatedID;
     }
 };
 __decorate([
-    (0, common_1.Get)(''),
-    __param(0, (0, common_1.Query)('query')),
+    (0, common_1.Post)('/generate'),
+    __param(0, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
+    __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
-], MyController.prototype, "createDocument", null);
-__decorate([
-    (0, common_1.Get)('lastid'),
-    __param(0, (0, common_1.Query)('query')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", Promise)
-], MyController.prototype, "getLastGeneratedId", null);
-MyController = __decorate([
+], UniqueIDController.prototype, "generateUniqueID", null);
+UniqueIDController = __decorate([
     (0, common_1.Controller)('/v1'),
-    __metadata("design:paramtypes", [Unicode_service_1.MyService])
-], MyController);
-exports.MyController = MyController;
-//# sourceMappingURL=Unicode.controller.js.map
+    __metadata("design:paramtypes", [uniqueId_service_1.UniqueIDService])
+], UniqueIDController);
+exports.UniqueIDController = UniqueIDController;
+//# sourceMappingURL=uniqueId.controller.js.map

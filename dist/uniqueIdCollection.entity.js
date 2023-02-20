@@ -9,20 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.IdCounter = void 0;
+exports.UniqueIDCollection = void 0;
 const typeorm_1 = require("typeorm");
-let IdCounter = class IdCounter {
+let UniqueIDCollection = class UniqueIDCollection {
 };
 __decorate([
     (0, typeorm_1.ObjectIdColumn)(),
+    __metadata("design:type", Number)
+], UniqueIDCollection.prototype, "_id", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], IdCounter.prototype, "id", void 0);
+], UniqueIDCollection.prototype, "firstTwo", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", Number)
-], IdCounter.prototype, "lastId", void 0);
-IdCounter = __decorate([
+], UniqueIDCollection.prototype, "fifthEighth", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Date)
+], UniqueIDCollection.prototype, "createdAt", void 0);
+UniqueIDCollection = __decorate([
     (0, typeorm_1.Entity)()
-], IdCounter);
-exports.IdCounter = IdCounter;
-//# sourceMappingURL=idCounter.entity.js.map
+], UniqueIDCollection);
+exports.UniqueIDCollection = UniqueIDCollection;
+//# sourceMappingURL=uniqueIdCollection.entity.js.map

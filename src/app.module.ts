@@ -1,8 +1,9 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { MyCollection } from './unicode.entity';
-import { MyController } from './Unicode.controller';
-import { MyService } from './Unicode.service';
+import { UniqueID } from './uniqueId.entity';
+import { UniqueIDCollection } from './uniqueIdCollection.entity';
+import { UniqueIDController } from './uniqueId.controller';
+import { UniqueIDService } from './uniqueId.service';
 
 @Module({
   imports: [
@@ -11,12 +12,12 @@ import { MyService } from './Unicode.service';
       host: 'localhost',
       port: 27018,
       database: 'IM',
-      entities: [MyCollection],
+      entities: [UniqueID, UniqueIDCollection],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([MyCollection]),
+    TypeOrmModule.forFeature([UniqueID, UniqueIDCollection]),
   ],
-  controllers: [MyController],
-  providers: [MyService],
+  controllers: [UniqueIDController],
+  providers: [UniqueIDService],
 })
 export class AppModule {}

@@ -9,24 +9,28 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.MyCollection = void 0;
+exports.UniqueID = void 0;
 const typeorm_1 = require("typeorm");
-let MyCollection = class MyCollection {
+let UniqueID = class UniqueID {
 };
 __decorate([
     (0, typeorm_1.ObjectIdColumn)(),
-    __metadata("design:type", String)
-], MyCollection.prototype, "id", void 0);
+    __metadata("design:type", Number)
+], UniqueID.prototype, "_id", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], MyCollection.prototype, "query", void 0);
+], UniqueID.prototype, "query", void 0);
 __decorate([
     (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], MyCollection.prototype, "generatedId", void 0);
-MyCollection = __decorate([
+], UniqueID.prototype, "generatedId", void 0);
+__decorate([
+    (0, typeorm_1.Column)(),
+    __metadata("design:type", Date)
+], UniqueID.prototype, "createdAt", void 0);
+UniqueID = __decorate([
     (0, typeorm_1.Entity)()
-], MyCollection);
-exports.MyCollection = MyCollection;
-//# sourceMappingURL=unicode.entity.js.map
+], UniqueID);
+exports.UniqueID = UniqueID;
+//# sourceMappingURL=uniqueId.entity.js.map
